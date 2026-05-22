@@ -1,7 +1,7 @@
 // ── Low-level API Wrapper ──────────────────
 async function callGemini(userMessage, systemInstruction) {
-  // Using gemini-1.5-flash for fast, responsive generation
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  // Updated to gemini-2.5-flash (the 1.5-flash model was shut down)
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
   const res = await fetch(url, {
     method: 'POST',
