@@ -7,7 +7,7 @@ let selectedLang = 'auto';
 // ── API Key Input ──────────────────────────
 document.getElementById('apikey').addEventListener('input', function () {
   apiKey = this.value.trim();
-  document.getElementById('key-status').style.display = apiKey.startsWith('sk-') ? 'inline' : 'none';
+  document.getElementById('key-status').style.display = apiKey.startsWith('AIza') ? 'inline' : 'none';
   updateStartBtn();
 });
 

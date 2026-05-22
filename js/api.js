@@ -1,23 +1,32 @@
 // ── Low-level API Wrapper ──────────────────
-async function callClaude(messages, system) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+async function callGemini(userMessage, systemInstruction) {
+  // Using gemini-1.5-flash for fast, responsive generation
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+  const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4000,
-      system,
-      messages
+      systemInstruction: {
+        parts: [{ text: systemInstruction }]
+      },
+      contents: [{
+        role: 'user',
+        parts: [{ text: userMessage }]
+      }],
+      generationConfig: {
+        temperature: 0.2, // Low temperature for more deterministic quiz questions
+        responseMimeType: "application/json" // Forces the model to output strict JSON
+      }
     })
   });
+  
   const data = await res.json();
   if (!res.ok) throw new Error(data.error?.message || 'API error');
-  return data.content.map(b => b.text || '').join('');
+  
+  return data.candidates[0].content.parts[0].text;
 }
 
 // ── Build the System Prompt ────────────────
@@ -34,7 +43,7 @@ Focus on: ${hint}${autoNote}
 
 Also extract the most relevant 4–6 lines of the student's code as a snippet for each question.
 
-Respond ONLY with valid JSON (no markdown, no code fences):
+Respond ONLY with a valid JSON object. Do not use markdown formatting. Use this schema exactly:
 {
   "detectedLanguage": "language name or empty if specified",
   "questions": ["question text 1", ...repeat for all ${TOTAL_QUESTIONS}],
@@ -71,7 +80,7 @@ async function generateQuestions() {
   const system  = buildSystemPrompt(hint, autoNote);
   const userMsg = `Task: ${taskVal || 'programming task'}\n\nStudent ${langLabel} code:\n${codeVal}`;
 
-  const text   = await callClaude([{ role: 'user', content: userMsg }], system);
+  const text   = await callGemini(userMsg, system);
   const clean  = text.replace(/```json|```/g, '').trim();
   const parsed = JSON.parse(clean);
 
