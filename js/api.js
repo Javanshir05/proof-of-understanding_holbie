@@ -1,6 +1,7 @@
 // ── Low-level API Wrapper ──────────────────
 async function callGrok(userMessage, systemInstruction) {
-  const url = 'https://api.xai.com/v1/chat/completions';
+  // Using the Netlify rewrite proxy to avoid CORS errors
+  const url = '/xai-proxy/chat/completions';
 
   const res = await fetch(url, {
     method: 'POST',

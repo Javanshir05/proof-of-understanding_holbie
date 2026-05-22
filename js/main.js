@@ -7,7 +7,6 @@ let selectedLang = 'auto';
 // ── API Key Input ──────────────────────────
 document.getElementById('apikey').addEventListener('input', function () {
   apiKey = this.value.trim();
-  // Grok keys generally begin with "xai-"
   document.getElementById('key-status').style.display = apiKey.startsWith('xai-') ? 'inline' : 'none';
   updateStartBtn();
 });
