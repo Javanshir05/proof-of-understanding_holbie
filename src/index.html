@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proof-of-Understanding Validator</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="dots">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+    </div>
+    <span class="topbar-title">proof-of-understanding.validator</span>
+    <span class="lang-badge" id="topbar-lang">LANG: AUTO</span>
+  </div>
+
+  <div class="key-banner">
+    <label for="apikey">Anthropic API Key</label>
+    <input id="apikey" class="key-input" type="password" placeholder="sk-ant-..." autocomplete="off" />
+    <span id="key-status" class="key-saved" style="display:none">✓ saved</span>
+  </div>
+
+  <div id="screen-submit" class="screen active">
+    <div class="hero">
+      <div class="hero-tag">// validator v2.1 · multiple choice</div>
+      <h1 class="hero-title">Did you <span>actually</span> write that?</h1>
+      <p class="hero-desc">Paste any code. The AI generates 10 multiple-choice questions about your specific implementation — each with 3 answer choices (A, B, C). 20 seconds per question — click the correct answer or lose the point.</p>
+    </div>
+
+    <div class="section">
+      <div class="label">// select language</div>
+      <div class="lang-row" id="lang-row"></div>
+    </div>
+
+    <div class="section">
+      <div class="label">// task description (optional)</div>
+      <input id="task-desc" class="input" type="text" placeholder="e.g. Implement a binary search tree" />
+    </div>
+
+    <div class="section">
+      <div class="label">// your code</div>
+      <textarea id="code-input" class="code-area" rows="14" placeholder="Paste the code you submitted here..."></textarea>
+    </div>
+
+    <div class="row-end">
+      <span class="hint-text">10 questions · 3 choices each · 20 s per question</span>
+      <button id="btn-start" class="btn" disabled>Start Interrogation →</button>
+    </div>
+  </div>
+
+  <div id="screen-loading" class="screen">
+    <div class="loading-screen">
+      <div class="spinner"></div>
+      <div id="loading-msg" class="loading-msg">Parsing your code</div>
+    </div>
+  </div>
+
+  <div id="screen-questions" class="screen">
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <div class="q-meta">
+      <span id="q-meta-left">Question 1 of 10</span>
+      <span id="q-meta-score" style="color:var(--amber);font-weight:700">0 / 0</span>
+    </div>
+
+    <div class="q-text" id="q-text"></div>
+    <div class="code-ref" id="code-ref"></div>
+    <div class="feedback-bar" id="feedback-bar"></div>
+
+    <div class="timer-row">
+      <div class="timer-ring">
+        <svg width="54" height="54" viewBox="0 0 54 54">
+          <circle class="track" cx="27" cy="27" r="23"/>
+          <circle id="timer-arc" class="fill-arc" cx="27" cy="27" r="23"
+                  stroke-dasharray="144.51" stroke-dashoffset="0" stroke="#d4a017"/>
+        </svg>
+        <div class="timer-num" id="timer-num" style="color:#d4a017">20</div>
+      </div>
+      <span class="timer-label" id="timer-label">seconds to choose</span>
+    </div>
+
+    <div class="options-grid" id="options-grid"></div>
+  </div>
+
+  <div id="screen-evaluating" class="screen">
+    <div class="loading-screen">
+      <div class="spinner"></div>
+      <div id="eval-msg" class="loading-msg">Compiling your results</div>
+    </div>
+  </div>
+
+  <div id="screen-result" class="screen">
+    <div class="result-screen">
+      <div id="badge-ring" class="badge-ring badge-pass">
+        <div class="badge-icon" id="badge-icon">✓</div>
+        <div class="badge-word" id="badge-word">Verified</div>
+      </div>
+
+      <div class="score-num score-pass" id="score-num">10/10</div>
+      <h2 class="result-title" id="result-title">Ready for Peer Review</h2>
+      <p class="result-sub" id="result-sub"></p>
+
+      <div id="next-step-box" class="next-step-box" style="display:none">
+        <div class="nsl">// next step</div>
+        <p id="next-step-text"></p>
+      </div>
+
+      <div class="eval-cards" id="eval-cards"></div>
+
+      <div class="result-actions">
+        <button class="btn-ghost" id="btn-new">Test New Code</button>
+        <button class="btn" id="btn-retry" style="display:none">Retry Quiz →</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
