@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Proof-of-Understanding Validator</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 <div class="page">
 
+  <!-- ── Topbar ── -->
   <div class="topbar">
     <div class="dots">
       <div class="dot dot-r"></div>
@@ -20,12 +25,14 @@
     <span class="lang-badge" id="topbar-lang">LANG: AUTO</span>
   </div>
 
+  <!-- ── API Key Banner ── -->
   <div class="key-banner">
     <label for="apikey">Anthropic API Key</label>
     <input id="apikey" class="key-input" type="password" placeholder="sk-ant-..." autocomplete="off" />
     <span id="key-status" class="key-saved" style="display:none">✓ saved</span>
   </div>
 
+  <!-- ══ SCREEN: Submit ══ -->
   <div id="screen-submit" class="screen active">
     <div class="hero">
       <div class="hero-tag">// validator v2.1 · multiple choice</div>
@@ -54,6 +61,7 @@
     </div>
   </div>
 
+  <!-- ══ SCREEN: Loading ══ -->
   <div id="screen-loading" class="screen">
     <div class="loading-screen">
       <div class="spinner"></div>
@@ -61,6 +69,7 @@
     </div>
   </div>
 
+  <!-- ══ SCREEN: Questions ══ -->
   <div id="screen-questions" class="screen">
     <div class="progress-bar" id="progress-bar"></div>
 
@@ -88,6 +97,7 @@
     <div class="options-grid" id="options-grid"></div>
   </div>
 
+  <!-- ══ SCREEN: Evaluating ══ -->
   <div id="screen-evaluating" class="screen">
     <div class="loading-screen">
       <div class="spinner"></div>
@@ -95,6 +105,7 @@
     </div>
   </div>
 
+  <!-- ══ SCREEN: Result ══ -->
   <div id="screen-result" class="screen">
     <div class="result-screen">
       <div id="badge-ring" class="badge-ring badge-pass">

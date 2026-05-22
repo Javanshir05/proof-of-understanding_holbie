@@ -1,10 +1,10 @@
 // ── Quiz Settings ──────────────────────────
-const TIMER_SECS = 20;   // seconds per question
+const TIMER_SECS = 20;
 const TOTAL_QUESTIONS = 10;
-const PASS_THRESHOLD = 7;   // score needed to pass
-const PARTIAL_THRESHOLD = 5; // score for partial credit
+const PASS_THRESHOLD = 7;   
+const PARTIAL_THRESHOLD = 5; 
 const KEYS = ['A', 'B', 'C'];
-const CIRC = 2 * Math.PI * 23; // SVG timer arc circumference
+const CIRC = 2 * Math.PI * 23; 
 
 // ── Supported Languages ────────────────────
 const LANGS = [

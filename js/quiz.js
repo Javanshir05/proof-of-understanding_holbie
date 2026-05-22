@@ -3,7 +3,7 @@ let questions      = [];
 let snippets       = [];
 let allChoices     = [];
 let correctIndices = [];
-let answers        = [];   
+let answers        = [];   // chosen index per question (-1 = timed out)
 let currentQ       = 0;
 let runningScore   = 0;
 let locked         = false;
